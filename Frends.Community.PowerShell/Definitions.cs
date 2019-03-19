@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Frends.Community.PowerShell;
 
-namespace Frends.PowerShell
+namespace Frends.Community.PowerShell
 {
     public class RunCommandInput {
         public string Command { get; set; }

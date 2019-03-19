@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using NUnit.Framework;
 
-namespace Frends.PowerShell.Tests
+namespace Frends.Community.PowerShell.Tests
 {
     [TestFixture]
     public class PowerShellTests
@@ -39,7 +39,7 @@ write-output ""my test param: $testParam""";
 
             var result = PowerShell.RunScript(new RunScriptInput
             {
-                Parameters = new[] {new PowerShellParameter {Name = "testParam", Value = "my test param"}},
+                Parameters = new[] { new PowerShellParameter { Name = "testParam", Value = "my test param" } },
                 ReadFromFile = false,
                 Script = script
             }, new RunOptions());
@@ -141,10 +141,10 @@ new-timespan -hours 2";
                 });
 
             var result2 = PowerShell.RunScript(new RunScriptInput
-                {
-                    ReadFromFile = false,
-                    Script = "(new-timespan -hours 1) + $timespan"
-                },
+            {
+                ReadFromFile = false,
+                Script = "(new-timespan -hours 1) + $timespan"
+            },
                 new RunOptions
                 {
                     Session = session
@@ -156,12 +156,26 @@ new-timespan -hours 2";
         [Test]
         public void RunScript_ShouldListErrors()
         {
-            var script = 
-@"This-DoesNotExist
+            var script =
+@"
+This-DoesNotExist
+$Source = @""
+using System; 
+namespace test {
+    public static class pstest {
+        public static void test`(`) {
+        throw new Exception(""Argh""); 
+        }
+    }
+}
+""@
+
+Add-Type -TypeDefinition $Source -Language CSharp
+[test.pstest]::test()
 get-process -name doesnotexist -ErrorAction Stop
 ";
 
-            var resultError = Assert.Throws<Exception>(() => PowerShell.RunScript(new RunScriptInput {ReadFromFile = false, Script = script}, null));
+            var resultError = Assert.Throws<Exception>(() => PowerShell.RunScript(new RunScriptInput { ReadFromFile = false, Script = script }, null));
 
             Assert.That(resultError.Message, Is.Not.Null);
         }

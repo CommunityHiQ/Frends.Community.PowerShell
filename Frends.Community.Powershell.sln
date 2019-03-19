@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frends.Powershell", "Frends.Powershell\Frends.Powershell.csproj", "{A26D4B5A-2F19-4132-B656-BA413C775560}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frends.Community.PowerShell", "Frends.Community.PowerShell\Frends.Community.PowerShell.csproj", "{A26D4B5A-2F19-4132-B656-BA413C775560}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frends.PowerShell.Tests", "Frends.PowerShell.Tests\Frends.PowerShell.Tests.csproj", "{8C342DE1-337D-4CCD-9ED4-C79E14FDDFBF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frends.Community.PowerShell.Tests", "Frends.Community.PowerShell.Tests\Frends.Community.PowerShell.Tests.csproj", "{8C342DE1-337D-4CCD-9ED4-C79E14FDDFBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

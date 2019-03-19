@@ -8,8 +8,8 @@ using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Frends.PowerShell.Tests")]
-namespace Frends.PowerShell
+[assembly: InternalsVisibleTo("Frends.Community.PowerShell.Tests")]
+namespace Frends.Community.PowerShell
 {
     /// <summary>
     /// Wraps the powershell session

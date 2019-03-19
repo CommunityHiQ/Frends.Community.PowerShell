@@ -8,7 +8,7 @@ using System.Management.Automation;
 using System.Management.Automation.Host;
 using System.Security;
 
-namespace Frends.PowerShell
+namespace Frends.Community.PowerShell
 {
     internal class TaskUserInterface : PSHostUserInterface
     {
@@ -64,7 +64,7 @@ namespace Frends.PowerShell
 
         public override Dictionary<string, PSObject> Prompt(string caption, string message, Collection<FieldDescription> descriptions)
         {
-            return descriptions.ToDictionary(desc => desc.Name, desc => new PSObject("")); // Return empty string as answer
+            return descriptions?.ToDictionary(desc => desc.Name, desc => new PSObject("")); // Return empty string as answer
         }
 
         public override PSCredential PromptForCredential(string caption, string message, string userName, string targetName)

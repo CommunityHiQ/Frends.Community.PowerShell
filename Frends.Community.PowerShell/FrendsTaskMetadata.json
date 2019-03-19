@@ -1,0 +1,13 @@
+﻿{
+  "Tasks": [
+    /*{
+      "TaskMethod": "Frends.Community.PowerShell.Runner.CreateSession"
+    },*/
+    {
+      "TaskMethod": "Frends.Community.PowerShell.PowerShell.RunCommand"
+    },
+    {
+      "TaskMethod": "Frends.Community.PowerShell.PowerShell.RunScript"
+    }
+  ]
+}

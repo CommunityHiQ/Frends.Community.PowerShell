@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
-    <id>Frends.Powershell</id>
+    <id>Frends.Community.PowerShell</id>
     <version>1.0.0.0</version>
-    <title>FRENDS Powershell tasks</title>
+    <title>FRENDS Community PowerShell Tasks</title>
     <authors>HiQ Finland</authors>
     <owners />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>FRENDS Powershell tasks</description>
+    <description>FRENDS Community PowerShell Tasks</description>
     <summary />
     <dependencies>
     </dependencies>
@@ -20,8 +20,8 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-	  <file src="Frends.Powershell\bin\Release\Frends.Powershell.dll" target="lib\net452\Frends.Powershell.dll" />
-    <file src="Frends.Powershell\bin\Release\Frends.Powershell.XML" target="Frends.Powershell.XML"/>
-    <file src="Frends.Powershell\FrendsTaskMetadata.json" target="FrendsTaskMetadata.json"/>
+	  <file src="..\Frends.Community.PowerShell\bin\Release\Frends.Community.PowerShell.dll" target="lib\net452\Frends.Community.PowerShell.dll" />
+    <file src="..\Frends.Community.PowerShell\bin\Release\Frends.Community.PowerShell.XML" target="Frends.Community.PowerShell.XML"/>
+    <file src="..\Frends.Community.PowerShell\FrendsTaskMetadata.json" target="FrendsTaskMetadata.json"/>
   </files>
 </package>

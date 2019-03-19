@@ -1,4 +1,4 @@
-- [Frends.PowerShell](#frendspowershell)
+- [Frends.Community.PowerShell](#frendspowershell)
   - [Installing](#installing)
   - [Building](#building)
   - [Contributing](#contributing)
@@ -11,7 +11,7 @@
       - [Result](#result)
   - [License](#license)
 
-# Frends.PowerShell
+# Frends.Community.PowerShell
 
 ## Installing
 You can install the task via FRENDS UI Task View or you can find the nuget package from the following nuget feed
@@ -21,22 +21,22 @@ You can install the task via FRENDS UI Task View or you can find the nuget packa
 
 Clone a copy of the repo
 
-`git clone https://github.com/FrendsPlatform/Frends.PowerShell.git`
+`git clone https://github.com/FrendsPlatform/Frends.Community.PowerShell.git`
 
 
 Restore dependencies
 
-`nuget restore frends.powershell`
+`nuget restore Frends.Community.PowerShell`
 
 Rebuild the project
 
 Run Tests with nunit3. Tests can be found under
 
-`Frends.PowerShell.Tests\bin\Release\Frends.PowerShell.Tests.dll`
+`Frends.Community.PowerShell.Tests\bin\Release\Frends.Community.PowerShell.Tests.dll`
 
 Create a nuget package
 
-`nuget pack nuspec/Frends.PowerShell.nuspec`
+`nuget pack nuspec/Frends.Community.PowerShell.nuspec`
 
 ## Contributing
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
