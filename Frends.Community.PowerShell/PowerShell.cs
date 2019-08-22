@@ -7,6 +7,7 @@ using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 [assembly: InternalsVisibleTo("Frends.Community.PowerShell.Tests")]
 namespace Frends.Community.PowerShell
@@ -88,7 +89,7 @@ namespace Frends.Community.PowerShell
                 var tempScript = Path.Combine(Path.GetTempPath(), $"{Path.GetRandomFileName()}.ps1");
                 try
                 {
-                    File.WriteAllText(tempScript, script);
+                    File.WriteAllText(tempScript, script, Encoding.UTF8);
 
                     return ExecuteCommand(tempScript, input.Parameters, session.PowerShell);
                 }
