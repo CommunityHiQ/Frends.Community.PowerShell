@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>Frends.Community.PowerShell</id>
-    <version>1.0.0.0</version>
+    <version>1.0.2.0</version>
     <title>FRENDS Community PowerShell Tasks</title>
     <authors>HiQ Finland</authors>
     <owners />
