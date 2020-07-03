@@ -9,6 +9,8 @@ using System.Management.Automation.Runspaces;
 using System.Runtime.CompilerServices;
 using System.Text;
 
+#pragma warning disable 1591
+
 [assembly: InternalsVisibleTo("Frends.Community.PowerShell.Tests")]
 namespace Frends.Community.PowerShell
 {

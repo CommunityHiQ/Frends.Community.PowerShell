@@ -1,44 +1,86 @@
-- [Frends.Community.PowerShell](#frendspowershell)
-  - [Installing](#installing)
-  - [Building](#building)
-  - [Contributing](#contributing)
-  - [Documentation](#documentation)
-    - [PowerShell.RunCommand](#powershellruncommand)
-      - [Input](#input)
-      - [Result](#result)
-    - [PowerShell.RunScript](#powershellrunscript)
-      - [Input](#input)
-      - [Result](#result)
-  - [License](#license)
-
 # Frends.Community.PowerShell
 
-## Installing
-You can install the task via FRENDS UI Task View or you can find the nuget package from the following nuget feed
-`https://www.myget.org/F/frends/api/v2`
+[![Actions Status](https://github.com/CommunityHiQ/Frends.Community.PowerShell/workflows/PackAndPushAfterMerge/badge.svg)](https://github.com/CommunityHiQ/Frends.Community.PowerShell/actions) ![MyGet](https://img.shields.io/myget/frends-community/v/Frends.Community.PowerShell) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
 
-## Building
+- [Installing](#installing)
+- [Tasks](#tasks)
+     - [RunCommand](#powerShell.RunCommand )
+     - [RunScript](#powerShell.RunScript)
+- [Building](#building)
+- [Contributing](#contributing)
+- [Change Log](#change-log)
+
+# Installing
+
+You can install the task via FRENDS UI Task View or you can find the NuGet package from the following NuGet feed
+https://www.myget.org/F/frends-community/api/v3/index.json and in Gallery view in MyGet https://www.myget.org/feed/frends-community/package/nuget/Frends.Community.PowerShell
+
+# Tasks
+
+
+## PowerShell.RunCommand 
+
+Execute a single PowerShell command with parameters, the Task fails when a terminating error is encountered or an error is thrown
+
+### Input
+
+| Property          | Type                               | Description                                                                         | Example                    |
+| ----------------- | ---------------------------------- | ----------------------------------------------------------------------------------- | -------------------------- |
+| Command           | string                             | The PowerShell command to execute                                                   | `New-TimeSpan`             |
+| Parameters        | Array{Name: string, Value: object} | Parameters for the command, provided switch parameters need to have a boolean value | `Name = Hours, Value = 1`  |
+
+
+### Result
+
+| Property          | Type                               | Description                                                                         | Example                    |
+| ----------------- | ---------------------------------- | ----------------------------------------------------------------------------------- | -------------------------- |
+| Result | Array{object} |  |  |
+| Errors | Array{string} |  |  |
+| Log | string |  |  |
+
+
+## PowerShell.RunScript
+
+Run a PowerShell script with parameters, the Task fails when a terminating error is encountered or an error is thrown
+
+### Input
+
+| Property          | Type                               | Description                                                                             | Example                                                  |
+| ----------------- | ---------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| ReadFromFile      | bool                               | Should the script be read from a file or from the Script parameter                      | `true`                                                   |
+| ScriptFilePath    | string                             | Location for the script file                                                            | `F:\myScript.ps1`                                        |
+| Script            | string                             | The script to execute                                                                   | `New-TimeSpan -Hours 1 \| convertto-json`                |
+| Parameters        | Array{Name: string, Value: object} | Parameters for the script, provided switch parameters need to have a boolean value      | `Name = Hours, Value = 1`                                |
+
+
+### Result
+| Property          | Type                               | Description                                                                         | Example                    |
+| ----------------- | ---------------------------------- | ----------------------------------------------------------------------------------- | -------------------------- |
+| Result | Array{object} |  |  |
+| Errors | Array{string} |  |  |
+| Log | string |  |  |
+
+
+
+# Building
 
 Clone a copy of the repo
 
-`git clone https://github.com/FrendsPlatform/Frends.Community.PowerShell.git`
-
-
-Restore dependencies
-
-`nuget restore Frends.Community.PowerShell`
+`git clone https://github.com/CommunityHiQ/Frends.Community.PowerShell.git`
 
 Rebuild the project
 
-Run Tests with nunit3. Tests can be found under
+`dotnet build`
 
-`Frends.Community.PowerShell.Tests\bin\Release\Frends.Community.PowerShell.Tests.dll`
+Run Tests
 
-Create a nuget package
+`dotnet test`
 
-`nuget pack nuspec/Frends.Community.PowerShell.nuspec`
+Create a NuGet package
 
-## Contributing
+`dotnet pack --configuration Release`
+
+# Contributing
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
 1. Fork the repo on GitHub
@@ -49,42 +91,9 @@ When contributing to this repository, please first discuss the change you wish t
 
 NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 
-## Documentation
+# Change Log
 
-The PowerShell Tasks require PowerShell 5.0 to work
-
-### PowerShell.RunCommand 
-
-Execute a single PowerShell command with parameters, the Task fails when a terminating error is encountered or an error is thrown
-
-#### Input
-
-| Property          | Type                               | Description                                                                         | Example                    |
-| ----------------- | ---------------------------------- | ----------------------------------------------------------------------------------- | -------------------------- |
-| Command           | string                             | The PowerShell command to execute                                                   | `New-TimeSpan`             |
-| Parameters        | Array{Name: string, Value: object} | Parameters for the command, provided switch parameters need to have a boolean value | `Name = Hours, Value = 1`  |
-
-
-#### Result
-{Result: Array{object}, Errors: Array{string}, Log: string}
-
-### PowerShell.RunScript
-
-Run a PowerShell script with parameters, the Task fails when a terminating error is encountered or an error is thrown
-
-#### Input
-
-| Property          | Type                               | Description                                                                             | Example                                                  |
-| ----------------- | ---------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| ReadFromFile      | bool                               | Should the script be read from a file or from the Script parameter                      | `true`                                                   |
-| ScriptFilePath    | string                             | Location for the script file                                                            | `F:\myScript.ps1`                                        |
-| Script            | string                             | The script to execute                                                                   | `New-TimeSpan -Hours 1 \| convertto-json`                |
-| Parameters        | Array{Name: string, Value: object} | Parameters for the script, provided switch parameters need to have a boolean value      | `Name = Hours, Value = 1`                                |
-
-
-#### Result
-{Result: Array{object}, Errors: Array{string}, Log: string}
-
-
-## License
-This project is licensed under the MIT License - see the LICENSE file for details
+| Version | Changes |
+| ------- | ------- |
+| 1.0.0   | First version |
+| 1.1.0   | Multi-framework and Github actions support  |
