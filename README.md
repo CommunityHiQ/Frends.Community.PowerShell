@@ -32,8 +32,8 @@ Execute a single PowerShell command with parameters, the Task fails when a termi
 
 ### Result
 
-| Property          | Type                               | Description                                                                         | Example                    |
-| ----------------- | ---------------------------------- | ----------------------------------------------------------------------------------- | -------------------------- |
+| Property          | Type                               | Description                                                                        | Example                    |
+| ----------------- | ---------------------------------- | ---------------------------------------------------------------------------------- | -------------------------- |
 | Result | Array{object} |  |  |
 | Errors | Array{string} |  |  |
 | Log | string |  |  |
