@@ -82,7 +82,7 @@ function Test-Switch {
         }
 
 
-        private string script =
+        private readonly string script =
             @"
 new-timespan -hours 1
 new-timespan -hours 2";
