@@ -93,7 +93,7 @@ namespace Frends.Community.PowerShell
                 {
                     File.WriteAllText(tempScript, script, Encoding.UTF8);
 
-                    return ExecuteCommand(tempScript, input.Parameters, session.PowerShell);
+                    return ExecuteCommand(tempScript, input.Parameters, input.LogInformationStream, session.PowerShell);
                 }
                 finally
                 {
@@ -126,12 +126,12 @@ namespace Frends.Community.PowerShell
         {
             return DoAndHandleSession(options?.Session, (session) =>
             {
-                return ExecuteCommand(input.Command, input.Parameters, session.PowerShell);
+                return ExecuteCommand(input.Command, input.Parameters, input.LogInformationStream, session.PowerShell);
             });
 
         }
 
-        private static PowerShellResult ExecuteCommand(string inputCommand, PowerShellParameter[] powerShellParameters,
+        private static PowerShellResult ExecuteCommand(string inputCommand, PowerShellParameter[] powerShellParameters, bool logInformationStream,
             System.Management.Automation.PowerShell powershell)
         {
             var command = new Command(inputCommand, isScript: false, useLocalScope: false);
@@ -146,7 +146,7 @@ namespace Frends.Community.PowerShell
 
             powershell.Commands.AddCommand(command);
 
-            return ExecutePowershell(powershell);
+            return ExecutePowershell(powershell, logInformationStream);
         }
 
         private static IList<string> GetErrorMessages(PSDataCollection<ErrorRecord> errors)
@@ -154,7 +154,7 @@ namespace Frends.Community.PowerShell
             return errors.Select(err => $"{err.ScriptStackTrace}: {err.Exception.Message}").ToList();
         }
 
-        private static PowerShellResult ExecutePowershell(System.Management.Automation.PowerShell powershell)
+        private static PowerShellResult ExecutePowershell(System.Management.Automation.PowerShell powershell, bool logInformationStream)
         {
             try
             {
@@ -164,7 +164,7 @@ namespace Frends.Community.PowerShell
                     // Powershell return values are usually wrapped inside of a powershell object, unwrap it or if it does not have a baseObject, return the actual object
                     Result = execution?.Select(GetResultObject).ToList(),
                     Errors = GetErrorMessages(powershell.Streams.Error),
-                    Log = string.Join("\n", powershell.Streams.Information.Select(info => info.MessageData.ToString()))
+                    Log = logInformationStream == false ? "" : string.Join("\n", powershell.Streams.Information.Select(info => info.MessageData.ToString()))
                 };
 
                 return result;

@@ -24,10 +24,11 @@ Execute a single PowerShell command with parameters, the Task fails when a termi
 
 ### Input
 
-| Property          | Type                               | Description                                                                         | Example                    |
-| ----------------- | ---------------------------------- | ----------------------------------------------------------------------------------- | -------------------------- |
-| Command           | string                             | The PowerShell command to execute                                                   | `New-TimeSpan`             |
-| Parameters        | Array{Name: string, Value: object} | Parameters for the command, provided switch parameters need to have a boolean value | `Name = Hours, Value = 1`  |
+| Property             | Type                               | Description                                                                         | Example                    |
+| -------------------- | ---------------------------------- | ----------------------------------------------------------------------------------- | -------------------------- |
+| Command              | string                             | The PowerShell command to execute                                                   | `New-TimeSpan`             |
+| Parameters           | Array{Name: string, Value: object} | Parameters for the command, provided switch parameters need to have a boolean value | `Name = Hours, Value = 1`  |
+| LogInformationStream | bool                               | The option to switch information stream logging on or off                           | 'false'                    |
 
 
 ### Result
@@ -45,12 +46,13 @@ Run a PowerShell script with parameters, the Task fails when a terminating error
 
 ### Input
 
-| Property          | Type                               | Description                                                                             | Example                                                  |
-| ----------------- | ---------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| ReadFromFile      | bool                               | Should the script be read from a file or from the Script parameter                      | `true`                                                   |
-| ScriptFilePath    | string                             | Location for the script file                                                            | `F:\myScript.ps1`                                        |
-| Script            | string                             | The script to execute                                                                   | `New-TimeSpan -Hours 1 \| convertto-json`                |
-| Parameters        | Array{Name: string, Value: object} | Parameters for the script, provided switch parameters need to have a boolean value      | `Name = Hours, Value = 1`                                |
+| Property             | Type                               | Description                                                                             | Example                                                  |
+| -------------------- | ---------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| ReadFromFile         | bool                               | Should the script be read from a file or from the Script parameter                      | `true`                                                   |
+| ScriptFilePath       | string                             | Location for the script file                                                            | `F:\myScript.ps1`                                        |
+| Script               | string                             | The script to execute                                                                   | `New-TimeSpan -Hours 1 \| convertto-json`                |
+| Parameters           | Array{Name: string, Value: object} | Parameters for the script, provided switch parameters need to have a boolean value      | `Name = Hours, Value = 1`                                |
+| LogInformationStream | bool                               | The option to switch information stream logging on or off                               | 'false'                    |
 
 
 ### Result
@@ -97,3 +99,4 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 | ------- | ------- |
 | 1.0.0   | First version |
 | 1.1.0   | Multi-framework and Github actions support  |
+| 1.2.0   | Option to turn information stream logging on or off |
