@@ -28,7 +28,7 @@ Execute a single PowerShell command with parameters, the Task fails when a termi
 | -------------------- | ---------------------------------- | ----------------------------------------------------------------------------------- | -------------------------- |
 | Command              | string                             | The PowerShell command to execute                                                   | `New-TimeSpan`             |
 | Parameters           | Array{Name: string, Value: object} | Parameters for the command, provided switch parameters need to have a boolean value | `Name = Hours, Value = 1`  |
-| LogInformationStream | bool                               | The option to switch information stream logging on or off                           | 'false'                    |
+| LogInformationStream | bool                               | Whether information stream should be logged or not                                  | 'false'                    |
 
 
 ### Result
@@ -52,7 +52,7 @@ Run a PowerShell script with parameters, the Task fails when a terminating error
 | ScriptFilePath       | string                             | Location for the script file                                                            | `F:\myScript.ps1`                                        |
 | Script               | string                             | The script to execute                                                                   | `New-TimeSpan -Hours 1 \| convertto-json`                |
 | Parameters           | Array{Name: string, Value: object} | Parameters for the script, provided switch parameters need to have a boolean value      | `Name = Hours, Value = 1`                                |
-| LogInformationStream | bool                               | The option to switch information stream logging on or off                               | 'false'                    |
+| LogInformationStream | bool                               | Whether information stream should be logged or not                               | 'false'                    |
 
 
 ### Result
