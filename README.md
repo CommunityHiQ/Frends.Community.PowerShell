@@ -100,3 +100,4 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 | 1.0.0   | First version |
 | 1.1.0   | Multi-framework and Github actions support  |
 | 1.2.0   | Option to turn information stream logging on or off |
+| 1.2.1   | Added support for a cancellation token. |
