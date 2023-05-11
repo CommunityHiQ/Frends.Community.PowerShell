@@ -25,7 +25,8 @@ namespace Frends.Community.PowerShell.Tests
                 },
                 LogInformationStream = true
             },
-                new RunOptions());
+                new RunOptions(),
+                default);
 
             Assert.That(result.Result, Is.Not.Null);
             Assert.That(result.Result.Single(), Is.EqualTo(TimeSpan.FromHours(1)));
@@ -44,7 +45,8 @@ write-output ""my test param: $testParam""";
                 ReadFromFile = false,
                 Script = script,
                 LogInformationStream = true
-            }, new RunOptions());
+            }, new RunOptions(),
+                default);
 
             Assert.That(result.Result.Count, Is.EqualTo(2));
             Assert.That(result.Result.Last(), Is.EqualTo("my test param: my test param"));
@@ -79,7 +81,8 @@ function Test-Switch {
                 new RunOptions
                 {
                     Session = session
-                });
+                },
+                default);
 
             Assert.That(result.Result.Single(), Is.EqualTo(switchParameterValue));
         }
@@ -103,7 +106,7 @@ new-timespan -hours 2";
                     ReadFromFile = true,
                     ScriptFilePath = scriptFilePath,
                     LogInformationStream = true
-                }, new RunOptions());
+                }, new RunOptions(), default);
             }
             finally
             {
@@ -124,7 +127,7 @@ new-timespan -hours 2";
                 ReadFromFile = false,
                 Script = script,
                 LogInformationStream = true
-            }, new RunOptions());
+            }, new RunOptions(), default);
 
 
             Assert.That(result.Result.Last(), Is.EqualTo(TimeSpan.FromHours(2)));
@@ -144,7 +147,7 @@ new-timespan -hours 2";
                 new RunOptions
                 {
                     Session = session
-                });
+                }, default);
 
             var result2 = PowerShell.RunScript(new RunScriptInput
             {
@@ -155,7 +158,7 @@ new-timespan -hours 2";
                 new RunOptions
                 {
                     Session = session
-                });
+                }, default);
 
             Assert.That(result2.Result.Single(), Is.EqualTo(TimeSpan.FromHours(2)));
         }
@@ -182,7 +185,7 @@ Add-Type -TypeDefinition $Source -Language CSharp
 get-process -name doesnotexist -ErrorAction Stop
 ";
 
-            var resultError = Assert.Throws<Exception>(() => PowerShell.RunScript(new RunScriptInput { ReadFromFile = false, Script = script, LogInformationStream = true }, null));
+            var resultError = Assert.Throws<Exception>(() => PowerShell.RunScript(new RunScriptInput { ReadFromFile = false, Script = script, LogInformationStream = true }, null, default));
 
             Assert.That(resultError.Message, Is.Not.Null);
         }
@@ -201,7 +204,7 @@ $test
                 ReadFromFile = false,
                 Script = script,
                 LogInformationStream = true
-            }, null);
+            }, null, default);
 
             Assert.That(result.Result[0].Property1, Is.EqualTo("Value1"));
             Assert.That(result.Result[0].Property2, Is.EqualTo("Value2"));
