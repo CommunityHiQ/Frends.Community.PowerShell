@@ -8,6 +8,7 @@ using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 
 #pragma warning disable 1591
 
@@ -78,7 +79,7 @@ namespace Frends.Community.PowerShell
         /// Executes a PowerShell script from a file or the script parameter
         /// </summary>
         /// <returns>Object { Result: List&lt;dynamic&gt;, Errors: List&lt;string&gt;, Log: string}</returns>
-        public static PowerShellResult RunScript(RunScriptInput input, [Browsable(false)]RunOptions options)
+        public static PowerShellResult RunScript(RunScriptInput input, [Browsable(false)] RunOptions options, CancellationToken cancellationToken)
         {
             return DoAndHandleSession(options?.Session, session =>
             {
@@ -93,7 +94,7 @@ namespace Frends.Community.PowerShell
                 {
                     File.WriteAllText(tempScript, script, Encoding.UTF8);
 
-                    return ExecuteCommand(tempScript, input.Parameters, input.LogInformationStream, session.PowerShell);
+                    return ExecuteCommand(tempScript, input.Parameters, input.LogInformationStream, session.PowerShell, cancellationToken);
                 }
                 finally
                 {
@@ -122,22 +123,23 @@ namespace Frends.Community.PowerShell
         /// Executes a PowerShell command with parameters, leave parameter value empty for a switch
         /// </summary>
         /// <returns>Object { Result: List&lt;dynamic&gt;, Errors: List&lt;string&gt;, Log: string}</returns>
-        public static PowerShellResult RunCommand(RunCommandInput input, [Browsable(false)]RunOptions options)
+        public static PowerShellResult RunCommand(RunCommandInput input, [Browsable(false)] RunOptions options, CancellationToken cancellationToken)
         {
             return DoAndHandleSession(options?.Session, (session) =>
             {
-                return ExecuteCommand(input.Command, input.Parameters, input.LogInformationStream, session.PowerShell);
+                return ExecuteCommand(input.Command, input.Parameters, input.LogInformationStream, session.PowerShell, cancellationToken);
             });
 
         }
 
         private static PowerShellResult ExecuteCommand(string inputCommand, PowerShellParameter[] powerShellParameters, bool logInformationStream,
-            System.Management.Automation.PowerShell powershell)
+            System.Management.Automation.PowerShell powershell, CancellationToken cancellationToken)
         {
             var command = new Command(inputCommand, isScript: false, useLocalScope: false);
 
             foreach (var parameter in powerShellParameters ?? new PowerShellParameter[] { })
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 var parameterName = parameter.Name.Trim('-', ' '); // Remove dash from start
 
                 // Switch parameters will have to specify value as true:
@@ -146,7 +148,7 @@ namespace Frends.Community.PowerShell
 
             powershell.Commands.AddCommand(command);
 
-            return ExecutePowershell(powershell, logInformationStream);
+            return ExecutePowershell(powershell, logInformationStream, cancellationToken);
         }
 
         private static IList<string> GetErrorMessages(PSDataCollection<ErrorRecord> errors)
@@ -154,7 +156,7 @@ namespace Frends.Community.PowerShell
             return errors.Select(err => $"{err.ScriptStackTrace}: {err.Exception.Message}").ToList();
         }
 
-        private static PowerShellResult ExecutePowershell(System.Management.Automation.PowerShell powershell, bool logInformationStream)
+        private static PowerShellResult ExecutePowershell(System.Management.Automation.PowerShell powershell, bool logInformationStream, CancellationToken cancellationToken)
         {
             try
             {
