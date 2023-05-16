@@ -1,8 +1,7 @@
-﻿using System;
-using System.Diagnostics;
+﻿using NUnit.Framework;
+using System;
 using System.IO;
 using System.Linq;
-using NUnit.Framework;
 
 namespace Frends.Community.PowerShell.Tests
 {
@@ -28,8 +27,8 @@ namespace Frends.Community.PowerShell.Tests
                 new RunOptions(),
                 default);
 
-            Assert.That(result.Result, Is.Not.Null);
-            Assert.That(result.Result.Single(), Is.EqualTo(TimeSpan.FromHours(1)));
+            Assert.IsNotNull(result.Result);
+            Assert.AreEqual(TimeSpan.FromHours(1), result.Result.Single());
         }
 
         [Test]
@@ -48,8 +47,8 @@ write-output ""my test param: $testParam""";
             }, new RunOptions(),
                 default);
 
-            Assert.That(result.Result.Count, Is.EqualTo(2));
-            Assert.That(result.Result.Last(), Is.EqualTo("my test param: my test param"));
+            Assert.AreEqual(2, result.Result.Count);
+            Assert.AreEqual("my test param: my test param", result.Result.Last());
         }
 
         [TestCase(true)]
@@ -84,7 +83,7 @@ function Test-Switch {
                 },
                 default);
 
-            Assert.That(result.Result.Single(), Is.EqualTo(switchParameterValue));
+            Assert.AreEqual(switchParameterValue, result.Result.Single());
         }
 
 
@@ -113,8 +112,8 @@ new-timespan -hours 2";
                 File.Delete(scriptFilePath);
             }
 
-            Assert.That(result.Result.Count, Is.EqualTo(2));
-            Assert.That(result.Result.Last(), Is.EqualTo(TimeSpan.FromHours(2)));
+            Assert.AreEqual(2, result.Result.Count);
+            Assert.AreEqual(TimeSpan.FromHours(2), result.Result.Last());
         }
 
         [Test]
@@ -130,24 +129,13 @@ new-timespan -hours 2";
             }, new RunOptions(), default);
 
 
-            Assert.That(result.Result.Last(), Is.EqualTo(TimeSpan.FromHours(2)));
+            Assert.AreEqual(TimeSpan.FromHours(2), result.Result.Last());
         }
 
         [Test]
         public void RunCommandAndScript_ShouldUseSharedSession()
         {
             var session = PowerShell.CreateSession();
-
-            var result1 = PowerShell.RunScript(new RunScriptInput
-            {
-                ReadFromFile = false,
-                Script = "$timespan = $timespan + (new-timespan -hours 1)",
-                LogInformationStream = true
-            },
-                new RunOptions
-                {
-                    Session = session
-                }, default);
 
             var result2 = PowerShell.RunScript(new RunScriptInput
             {
@@ -160,7 +148,7 @@ new-timespan -hours 2";
                     Session = session
                 }, default);
 
-            Assert.That(result2.Result.Single(), Is.EqualTo(TimeSpan.FromHours(2)));
+            Assert.AreEqual(TimeSpan.FromHours(2), result2.Result.Single());
         }
 
         [Test]
@@ -187,7 +175,7 @@ get-process -name doesnotexist -ErrorAction Stop
 
             var resultError = Assert.Throws<Exception>(() => PowerShell.RunScript(new RunScriptInput { ReadFromFile = false, Script = script, LogInformationStream = true }, null, default));
 
-            Assert.That(resultError.Message, Is.Not.Null);
+            Assert.IsNotNull(resultError.Message);
         }
 
         [Test]
@@ -206,8 +194,8 @@ $test
                 LogInformationStream = true
             }, null, default);
 
-            Assert.That(result.Result[0].Property1, Is.EqualTo("Value1"));
-            Assert.That(result.Result[0].Property2, Is.EqualTo("Value2"));
+            Assert.AreEqual("Value1", result.Result[0].Property1);
+            Assert.AreEqual("Value2", result.Result[0].Property2);
         }
     }
 }

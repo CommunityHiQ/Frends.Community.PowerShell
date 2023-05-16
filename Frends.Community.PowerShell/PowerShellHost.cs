@@ -190,7 +190,7 @@ namespace Frends.Community.PowerShell
 
         public override void SetShouldExit(int exitCode)
         {
-            
+
         }
 
         /// <summary>

@@ -79,7 +79,7 @@ namespace Frends.Community.PowerShell
         /// Executes a PowerShell script from a file or the script parameter
         /// </summary>
         /// <returns>Object { Result: List&lt;dynamic&gt;, Errors: List&lt;string&gt;, Log: string}</returns>
-        public static PowerShellResult RunScript(RunScriptInput input, [Browsable(false)]RunOptions options, CancellationToken cancellationToken)
+        public static PowerShellResult RunScript(RunScriptInput input, [Browsable(false)] RunOptions options, CancellationToken cancellationToken)
         {
             return DoAndHandleSession(options?.Session, session =>
             {
@@ -123,7 +123,7 @@ namespace Frends.Community.PowerShell
         /// Executes a PowerShell command with parameters, leave parameter value empty for a switch
         /// </summary>
         /// <returns>Object { Result: List&lt;dynamic&gt;, Errors: List&lt;string&gt;, Log: string}</returns>
-        public static PowerShellResult RunCommand(RunCommandInput input, [Browsable(false)]RunOptions options, CancellationToken cancellationToken)
+        public static PowerShellResult RunCommand(RunCommandInput input, [Browsable(false)] RunOptions options, CancellationToken cancellationToken)
         {
             return DoAndHandleSession(options?.Session, (session) =>
             {
@@ -160,7 +160,6 @@ namespace Frends.Community.PowerShell
         {
             try
             {
-                cancellationToken.ThrowIfCancellationRequested();
                 var execution = powershell.Invoke();
                 var result = new PowerShellResult
                 {
