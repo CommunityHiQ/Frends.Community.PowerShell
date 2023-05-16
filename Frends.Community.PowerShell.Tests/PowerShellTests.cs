@@ -136,6 +136,17 @@ new-timespan -hours 2";
         public void RunCommandAndScript_ShouldUseSharedSession()
         {
             var session = PowerShell.CreateSession();
+            
+            PowerShell.RunScript(new RunScriptInput
+            {
+                ReadFromFile = false,
+                Script = "$timespan = $timespan + (new-timespan -hours 1)",
+                LogInformationStream = true
+            },
+                new RunOptions
+                {
+                    Session = session
+                }, default);
 
             var result2 = PowerShell.RunScript(new RunScriptInput
             {
