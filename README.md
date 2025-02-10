@@ -100,3 +100,4 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 | 1.0.0   | First version |
 | 1.1.0   | Multi-framework and Github actions support  |
 | 1.2.0   | Option to turn information stream logging on or off |
+| 1.3.0   | Updated dependencies: Microsoft.CSharp to 4.7.0, PowerShellStandard.Library to 5.1.1, System.ComponentModel.Annotations to 5.0.0 |
